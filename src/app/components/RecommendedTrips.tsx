@@ -9,6 +9,7 @@ async function fetchTrips() {
 
 export default async function RecommendedTrips() {
   const data = await fetchTrips();
+
   return (
     <div className="container mx-auto p-5">
       <div className="flex items-center">
