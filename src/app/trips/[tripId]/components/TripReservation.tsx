@@ -7,6 +7,7 @@ import { differenceInDays } from "date-fns";
 import { Controller, useForm } from "react-hook-form";
 
 interface TripReservationProps {
+  tripId: string;
   tripStartDate: Date;
   tripEndDate: Date;
   maxGuests: number;
@@ -20,6 +21,7 @@ interface TripReservationForm {
 }
 
 export default function TripReservation({
+  tripId,
   tripStartDate,
   tripEndDate,
   maxGuests,
@@ -31,10 +33,48 @@ export default function TripReservation({
     formState: { errors },
     control,
     watch,
+    setError,
   } = useForm<TripReservationForm>();
 
-  function onSubmit(data: any) {
-    console.log({ data });
+  async function onSubmit(data: TripReservationForm) {
+    const response = await fetch("http://localhost:3000/api/trips/check", {
+      method: "POST",
+      body: Buffer.from(
+        JSON.stringify({
+          startDate: data.startDate,
+          endDate: data.endDate,
+          tripId,
+        })
+      ),
+    });
+
+    const res = await response.json();
+
+    if (res?.error?.code === "TRIP_ALREADY_RESERVED") {
+      setError("startDate", {
+        type: "manual",
+        message: "Esta data já está reservada.",
+      });
+
+      setError("endDate", {
+        type: "manual",
+        message: "Esta data já está reservada.",
+      });
+    }
+
+    if (res?.error?.code === "INVALID_START_DATE") {
+      setError("startDate", {
+        type: "manual",
+        message: "Data inválida",
+      });
+    }
+
+    if (res?.error?.code === "INVALID_END_DATE") {
+      setError("endDate", {
+        type: "manual",
+        message: "Data inválida",
+      });
+    }
   }
 
   const startDate = watch("startDate");
