@@ -28,7 +28,7 @@ export default function TripConfirmation({
 
   useEffect(() => {
     async function fetchTrip() {
-      const response = await fetch("http://localhost:3000/api/trips/check", {
+      const response = await fetch("/api/trips/check", {
         method: "POST",
         body: JSON.stringify({
           startDate: searchParams.get("startDate"),
@@ -58,7 +58,7 @@ export default function TripConfirmation({
   if (!trip) return null;
 
   async function handleBuyClick() {
-    const res = await fetch("http://localhost:3000/api/payment", {
+    const res = await fetch("/api/payment", {
       method: "POST",
       body: Buffer.from(
         JSON.stringify({
