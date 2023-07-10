@@ -75,7 +75,10 @@ export default function TripSearch() {
           />
         </div>
 
-        <Button onClick={() => handleSubmit(onSubmit)()} className="w-1/2">
+        <Button
+          onClick={() => handleSubmit(onSubmit)()}
+          className="w-1/2 lg:h-fit"
+        >
           Buscar
         </Button>
       </div>
