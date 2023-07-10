@@ -20,9 +20,11 @@ export default async function RecommendedTrips() {
         <div className="w-full h-[1px] bg-grayLighter"></div>
       </div>
 
-      <div className="flex flex-col items-center mt-5 gap-5">
+      <div className="flex flex-col items-center mt-5 lg:mt-12 gap-5 lg:flex-row lg:flex-wrap lg:justify-center lg:gap-10">
         {data.map((trip) => (
-          <TripItem key={trip.id} trip={trip} />
+          <div key={trip.id} className="flex justify-center">
+            <TripItem trip={trip} />
+          </div>
         ))}
       </div>
     </div>
