@@ -1,4 +1,6 @@
-<h1 align="center">FSW Trips</h1>
+<p align="center">
+  <img src=".github/logo.png">
+</p>
 
 <p align="center">
   <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=ac7c59&labelColor=4b2428">
